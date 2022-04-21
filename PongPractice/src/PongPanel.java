@@ -120,7 +120,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
        }
    }
 
-	
+	// Paint Component
 	@Override
 	 public void paintComponent(Graphics g) {
 	     super.paintComponent(g);
