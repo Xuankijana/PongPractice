@@ -14,6 +14,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	private final static Color BACKGROUND_COLOUR = Color.BLACK;
 	private final static int TIMER_DELAY = 5;
+	boolean gameInitialised = false;
 	
 	public PongPanel() {
 		 setBackground(BACKGROUND_COLOUR);	
@@ -21,9 +22,23 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
          timer.start();
 	}
 	
-	private void update() {
-        
+	Ball ball;
+	public void createObjects() {
+        ball = new Ball(getWidth(), getHeight());
 	 }
+	 
+	 private void update() {
+	       if(!gameInitialised) {
+	             createObjects();
+	             gameInitialised = true;
+	        }
+	}
+	 
+	 private void paintSprite(Graphics g, Sprite sprite) {
+	      g.setColor(sprite.getColour());
+	      g.fillRect(sprite.getxPosition(), sprite.getyPosition(), sprite.getWidth(), sprite.getHeight());
+	 }
+
 	
 	private void paintDottedLine(Graphics g) {
 	         Graphics2D g2d = (Graphics2D) g.create();
@@ -38,6 +53,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	 public void paintComponent(Graphics g) {
 	     super.paintComponent(g);
 	     paintDottedLine(g);
+	     if(gameInitialised) {
+	          paintSprite(g, ball);
+	     }
 
 	 }
 	  
