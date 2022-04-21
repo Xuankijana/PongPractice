@@ -15,6 +15,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private final static Color BACKGROUND_COLOUR = Color.BLACK;
 	private final static int TIMER_DELAY = 5;
 	private static final int BALL_MOVEMENT_SPEED = 2;
+	private static final int PADDLE_MOVEMENT_SPEED = 2; // increase paddle speed
 	GameState gameState = GameState.INITIALISING;
 	
 	Ball ball;
@@ -46,8 +47,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
              break;
          }
          case PLAYING: {
+        	 moveObject(paddle1);
+             moveObject(paddle2);
         	 moveObject(ball);            // Move ball
-             checkWallBounce();            // Check for wall bounce
+             checkWallBounce();           // Check for wall bounce
              break;
         }
         case GAMEOVER: {
@@ -121,15 +124,15 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent event) {
 		
 		if(event.getKeyCode() == KeyEvent.VK_W) {
-	        paddle1.setyVelocity(-1);
+	        paddle1.setyVelocity(-1*PADDLE_MOVEMENT_SPEED);
 	    } else if(event.getKeyCode() == KeyEvent.VK_S) {
-	        paddle1.setyVelocity(1);
+	        paddle1.setyVelocity(1*PADDLE_MOVEMENT_SPEED);
 	    }
 		
 		if(event.getKeyCode() == KeyEvent.VK_UP) {
-              paddle2.setyVelocity(-1);
+              paddle2.setyVelocity(-1*PADDLE_MOVEMENT_SPEED);
         } else if(event.getKeyCode() == KeyEvent.VK_DOWN) {
-              paddle2.setyVelocity(1);
+              paddle2.setyVelocity(1*PADDLE_MOVEMENT_SPEED);
         }		
 	}
 
